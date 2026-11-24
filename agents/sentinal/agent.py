@@ -1,6 +1,12 @@
 
 from google.adk.agents import Agent
-
+from aegis.schemas.intelligence import IntelligenceAssessment
+from aegis.tools.incident_tools import (
+    initialize_incident,
+    get_incident,
+    update_incident_status,
+    record_incident_action
+)
 
 root_agent = Agent(
     name="sentinel",
@@ -40,5 +46,15 @@ root_agent = Agent(
     UNVERIFIED INFORMATION:
     CONFLICTING INFORMATION:
     MISSING INFORMATION:
-    """
+    """,
+
+    tools=[
+        initialize_incident,
+        get_incident,
+        update_incident_status,
+        record_incident_action
+    ],
+
+    output_schema=IntelligenceAssessment,
+    output_key="sentinel_assessment"
 )
