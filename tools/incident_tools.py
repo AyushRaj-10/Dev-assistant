@@ -137,3 +137,25 @@ def record_incident_action(
         "status": "success",
         "message": "Incident action recorded."
     }
+
+
+
+def get_sentinel_assessment(
+    tool_context: ToolContext
+) -> dict:
+    """
+    Retrieve SENTINEL's structured intelligence assessment.
+    """
+
+    assessment = tool_context.state.get("sentinel_assessment")
+
+    if assessment is None:
+        return {
+            "status": "error",
+            "message": "SENTINEL assessment is not available."
+        }
+
+    return {
+        "status": "success",
+        "assessment": assessment
+    }
